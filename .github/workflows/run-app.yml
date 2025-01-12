@@ -35,16 +35,20 @@ jobs:
         sudo apt install -y ffmpeg
         ffmpeg -version
         ffprobe -version
+    
+    # Step 5: Artifacts Directory
+    - name: Create Artifacts Directory
+      run: mkdir -p artifacts/videos
 
-    # Step 5: Run the Python script
+    # Step 6: Run the Python script
     - name: Run Python Script
       run: |
         source .venv/bin/activate
         python main_class.py
 
-    # Step 6: Save artifacts from the `artifacts` folder
+    # Step 7: Save artifacts from the `artifacts` folder
     - name: Upload Result Artifacts
       uses: actions/upload-artifact@v3
       with:
-        name: Artifacts
+        name: artifacts
         path: artifacts/
