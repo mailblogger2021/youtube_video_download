@@ -1,4 +1,5 @@
 tk
 ttkthemes
 yt-dlp
--U --pre "yt-dlp[default]"
+--pre "yt-dlp[default]"
+black

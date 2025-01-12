@@ -1,4 +1,4 @@
-name: Python Automation Workflow
+name: youtube video download
 
 on:
   push:
@@ -20,9 +20,11 @@ jobs:
       with:
         python-version: '3.9'
 
-    # Step 3: Install Dependencies
-    - name: Install Dependencies
+    # Step 3: Create Virtual Environment and Install Dependencies
+    - name: Set up Virtual Environment and Install Dependencies
       run: |
+        python -m venv .venv
+        source .venv/bin/activate
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
@@ -36,9 +38,11 @@ jobs:
 
     # Step 5: Run the Python script
     - name: Run Python Script
-      run: python main_class.py
+      run: |
+        source .venv/bin/activate
+        python main_class.py
 
-    # Step 6: Save artifacts from the `result` folder
+    # Step 6: Save artifacts from the `artifacts` folder
     - name: Upload Result Artifacts
       uses: actions/upload-artifact@v3
       with:
