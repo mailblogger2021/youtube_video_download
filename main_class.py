@@ -94,8 +94,33 @@ class download_youtube_video:
             #     print("Completed Index - ", index, " Link - ", link)
 
 
-# __name__
+import requests
+
+
+def get_location_info():
+    try:
+        response = requests.get("https://ipinfo.io/json")
+        if response.status_code == 200:
+            data = response.json()
+            country = data.get("country", "Unknown")
+            region = data.get("region", "Unknown")
+            city = data.get("city", "Unknown")
+            loc = data.get("loc", "Unknown")  # Latitude and Longitude
+            print(f"Country: {country}")
+            print(f"Region: {region}")
+            print(f"City: {city}")
+            print(f"Location (Lat, Long): {loc}")
+        else:
+            print(f"Failed to get location info. Status Code: {response.status_code}")
+    except Exception as e:
+        print(f"Error fetching location info: {e}")
+
+
+# Call the function
+get_location_info()
+
 if __name__ == "__main__":
+    # pass
     obj = download_youtube_video()
     youtube_channel_link = "https://www.youtube.com/@CortexTide"
     short_links = obj.get_short_links(youtube_channel_link)
