@@ -68,11 +68,18 @@ class download_youtube_video:
             subprocess.run(
                 [
                     "yt-dlp",
+                    "--geo-bypass",
+                    "--geo-bypass-country",
+                    "IN",
+                    "--proxy",
+                    "http://your-indian-proxy-server:port",
                     "--quiet",
+                    "--retry",
+                    "3",
                     "-f",
-                    "bestvideo+bestaudio/best",  # Ensure best video and audio are merged
+                    "bestvideo+bestaudio/best",
                     "--merge-output-format",
-                    "mp4",  # Output format as MP4
+                    "mp4",
                     "--output",
                     os.path.join(output_path, "%(title)s.%(ext)s"),
                     link,
