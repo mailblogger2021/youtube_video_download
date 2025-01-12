@@ -5,6 +5,8 @@ import os
 import yt_dlp
 import subprocess
 import logging
+import json
+import requests
 
 # logging.basicConfig(filename="results/main.log",level=logging.DEBUG)
 # logging.debug("This is debugging message")
@@ -93,8 +95,46 @@ class download_youtube_video:
             #     # progress_var.set(int((index / total_links) * 100))
             #     print("Completed Index - ", index, " Link - ", link)
 
+    def download_youtube_short(video_url, save_path="artifacts/"):
+        # Ensure the save_path exists
+        if not os.path.exists(save_path):
+            os.makedirs(save_path)
 
-import requests
+        ydl_opts = {
+            "outtmpl": f"{save_path}/1.%(title)s.%(ext)s",  # Video file save path
+            "format": "bestvideo+bestaudio/best",  # Best video and audio
+            "merge_output_format": "mp4",  # Output format
+            "writeinfojson": True,  # Save metadata JSON
+        }
+
+        try:
+            with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+                # Download video and metadata
+                info_dict = ydl.extract_info(video_url, download=True)
+
+                # Extract metadata
+                video_title = info_dict.get("title", "unknown_title")
+                video_description = info_dict.get(
+                    "description", "No description available."
+                )
+                video_tags = info_dict.get("tags", [])
+
+                # Save description and tags to text files
+                description_path = os.path.join(
+                    save_path, f"{video_title}_description.txt"
+                )
+                with open(description_path, "w", encoding="utf-8") as desc_file:
+                    desc_file.write(video_description)
+
+                tags_path = os.path.join(save_path, f"{video_title}_tags.txt")
+                with open(tags_path, "w", encoding="utf-8") as tags_file:
+                    tags_file.write(", ".join(video_tags))
+
+                print(f"Downloaded video: {video_title}")
+                print(f"Description saved to: {description_path}")
+                print(f"Tags saved to: {tags_path}")
+        except Exception as e:
+            print(f"Error: {e}")
 
 
 def get_location_info():
@@ -122,6 +162,9 @@ get_location_info()
 if __name__ == "__main__":
     # pass
     obj = download_youtube_video()
-    youtube_channel_link = "https://www.youtube.com/@CortexTide"
-    short_links = obj.get_short_links(youtube_channel_link)
-    obj.download_videos_from_links(short_links, obj.save_path)
+    short_url = "https://www.youtube.com/shorts/r0wdx3HBxMk"
+    obj.download_youtube_short(short_url)
+
+    # youtube_channel_link = "https://www.youtube.com/@CortexTide"
+    # short_links = obj.get_short_links(youtube_channel_link)
+    # obj.download_videos_from_links(short_links, obj.save_path)
