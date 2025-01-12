@@ -104,6 +104,7 @@ class download_youtube_video:
             "format": "bestvideo+bestaudio/best",  # Best video and audio
             "merge_output_format": "mp4",  # Output format
             "writeinfojson": True,  # Save metadata JSON
+            "cookies": "cookies.txt",
         }
 
         try:
