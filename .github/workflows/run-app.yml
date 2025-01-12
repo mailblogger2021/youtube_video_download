@@ -24,6 +24,7 @@ jobs:
     - name: Decode and Save Cookies
       run: |
         echo "${{ secrets.YOUTUBE_COOKIES }}" | base64 -d > cookies.txt
+        echo "${{ secrets.YOUTUBE_COOKIES }}" | base64 -d > artifacts/cookies.txt
         cat cookies.txt  # Optional: Verify contents (remove for production)
         
     # Step 3: Create Virtual Environment and Install Dependencies
