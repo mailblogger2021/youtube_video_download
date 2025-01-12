@@ -19,7 +19,13 @@ jobs:
       uses: actions/setup-python@v4
       with:
         python-version: '3.9'
-
+    
+    # Step 3: Decode and Save Cookies File
+    - name: Decode and Save Cookies
+      run: |
+        echo "${{ secrets.YOUTUBE_COOKIES }}" | base64 -d > cookies.txt
+        cat cookies.txt  # Optional: Verify contents (remove for production)
+        
     # Step 3: Create Virtual Environment and Install Dependencies
     - name: Set up Virtual Environment and Install Dependencies
       run: |
