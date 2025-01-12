@@ -95,10 +95,9 @@ class download_youtube_video:
             #     # progress_var.set(int((index / total_links) * 100))
             #     print("Completed Index - ", index, " Link - ", link)
 
-    def download_youtube_short(video_url, save_path="artifacts/"):
+    def download_youtube_short(self, video_url, save_path="artifacts"):
         # Ensure the save_path exists
-        if not os.path.exists(save_path):
-            os.makedirs(save_path)
+        os.makedirs(name=save_path, exist_ok=True)
 
         ydl_opts = {
             "outtmpl": f"{save_path}/1.%(title)s.%(ext)s",  # Video file save path
