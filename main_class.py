@@ -70,16 +70,16 @@ class download_youtube_video:
                     "yt-dlp",
                     "--geo-bypass",
                     "--geo-bypass-country",
-                    "IN",
+                    "IN",  # Simulate access from India
                     "--proxy",
-                    "http://your-indian-proxy-server:port",
+                    "http://123.45.67.89:8080",  # Replace with your valid proxy
                     "--quiet",
                     "--retry",
-                    "3",
+                    "3",  # Retry 3 times in case of failure
                     "-f",
-                    "bestvideo+bestaudio/best",
+                    "bestvideo+bestaudio/best",  # Best video and audio quality
                     "--merge-output-format",
-                    "mp4",
+                    "mp4",  # Merge output as MP4
                     "--output",
                     os.path.join(output_path, "%(title)s.%(ext)s"),
                     link,
