@@ -64,27 +64,27 @@ class download_youtube_video:
         for index, link in enumerate(links, start=1):
             link = link.strip()
             print("Started Index - ", index, " Link - ", link)
-            try:
-                subprocess.run(
-                    [
-                        "yt-dlp",
-                        "--quiet",
-                        "-f",
-                        "bestvideo+bestaudio/best",  # Ensure best video and audio are merged
-                        "--merge-output-format",
-                        "mp4",  # Output format as MP4
-                        "--output",
-                        os.path.join(output_path, "%(title)s.%(ext)s"),
-                        link,
-                    ],
-                    check=True,
-                )
-                # subprocess.run(['yt-dlp', '--quiet', '--output', os.path.join(output_path, '%(title)s.%(ext)s'), link], check=True)
-            except subprocess.CalledProcessError as e:
-                print(f"Error downloading {link}: {e}")
-            finally:
-                # progress_var.set(int((index / total_links) * 100))
-                print("Completed Index - ", index, " Link - ", link)
+            # try:
+            subprocess.run(
+                [
+                    "yt-dlp",
+                    "--quiet",
+                    "-f",
+                    "bestvideo+bestaudio/best",  # Ensure best video and audio are merged
+                    "--merge-output-format",
+                    "mp4",  # Output format as MP4
+                    "--output",
+                    os.path.join(output_path, "%(title)s.%(ext)s"),
+                    link,
+                ],
+                check=True,
+            )
+            # subprocess.run(['yt-dlp', '--quiet', '--output', os.path.join(output_path, '%(title)s.%(ext)s'), link], check=True)
+            # except subprocess.CalledProcessError as e:
+            #     print(f"Error downloading {link}: {e}")
+            # finally:
+            #     # progress_var.set(int((index / total_links) * 100))
+            #     print("Completed Index - ", index, " Link - ", link)
 
 
 # __name__
