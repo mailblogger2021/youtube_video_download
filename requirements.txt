@@ -3,3 +3,4 @@ ttkthemes
 yt-dlp
 --pre "yt-dlp[default]"
 black
+requests
