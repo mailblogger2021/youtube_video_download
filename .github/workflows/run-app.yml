@@ -20,6 +20,10 @@ jobs:
       with:
         python-version: '3.9'
     
+    # Step 5: Artifacts Directory
+    - name: Create Artifacts Directory
+      run: mkdir -p artifacts/videos
+
     # Step 3: Decode and Save Cookies File
     - name: Decode and Save Cookies
       run: |
