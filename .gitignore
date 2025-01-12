@@ -173,3 +173,4 @@ cython_debug/
 #artifacts
 artifacts/
 *.cookies.txt
+*.cookies_base64.txt
